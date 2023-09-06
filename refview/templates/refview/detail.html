@@ -1,0 +1,35 @@
+{% extends "refview/index.html" %}
+{% load static%}
+
+{% block body %}
+
+{% include 'refview/navbar.html' %}
+<script src="{% static 'refview/scripts.js' %}"></script>
+<script>
+    const suggestions = [{% for tag in suggestions %}"{{ tag }}",{% endfor %}];
+</script>
+<div class="detail-container">
+    <img 
+        class="detail" 
+        src="{{ object.image.url }}"
+        width="{{ object.image.width }}"
+        height="{{ object.image.height }}"
+    >
+    <div class="tag-container">
+        {% for tag in tags %}
+        <form method="post" class="tag" name="delete-{{ tag.id }}">
+            {% csrf_token %}
+            <p>{{tag.name}}</p>
+            <label class="clickable" for="tag{{ tag.id }}_sub">&Cross;</label>
+            <input name="delete" value="{{ tag.id }}" class="hidden">
+            <input type="submit" id="tag{{ tag.id }}_sub" class="hidden">
+        </form>
+        {% endfor %}
+        <form id="hidden_menu" method="post" class="tag" name="add-tag">
+            <input type="text" class="hidden" placeholder="Tag">
+            <p class="clickable" onclick="show_menu('hidden_menu')">&#10010;</p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

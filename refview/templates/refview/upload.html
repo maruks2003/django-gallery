@@ -1,0 +1,18 @@
+{% extends "refview/index.html" %}
+
+{% block body %}
+{% include 'refview/navbar.html' %}
+<form class="upload" method="post" name="image" enctype="multipart/form-data">
+    <h2>Upload Image</h2>
+    {% csrf_token %}
+    {{ post_form.image }}
+    {{ post_form.tags }}
+    <input type="submit" name="image" value="Save">
+</form>
+<form class="upload" method="post" name="tag" enctype="multipart/form-data">
+    <h2>Add Tags</h2>
+    {% csrf_token %}
+    {{ tag_form }}
+    <input type="submit" name="tag" value="Save">
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% block navbar %}
+<div class="navbar">
+        <a
+        class="navbar-item
+        {% url 'index' as index %}
+        {% if request.path == index %}
+            active
+        {% endif %}"
+        href="{% url 'index' %}"
+        >
+            GALLERY
+        </a>
+        <a
+        class="navbar-item
+        {% url 'upload' as upload %}
+        {% if request.path == upload %}
+            active"
+        {% endif %}"
+        href="{% url 'upload' %}"
+        >
+            UPLOAD
+        </a>
+        <a class="navbar-item" href="{% url "random" %}">RANDOM</a>
+</div>
+{% endblock navbar %}
